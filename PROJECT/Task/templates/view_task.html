@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="padding-bottom: 100px;">  
+    <h1 style="text-align: center; color: #e53410; margin-bottom: 20px; animation: fadeIn 1s ease-in-out;">Your Tasks</h1>
+    
+    <h2 style="color: #86f4fc; text-align: center;">Uncompleted Tasks</h2>
+    {% for task in uncompleted_tasks %}
+    <div style="background-color: #1f1f1f; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); margin-bottom: 20px; animation: slideIn 1s ease-in-out;">
+        <h3 style="color: #bb86fc;">{{ task.name }}</h3>
+        <p style="color: #e0e0e0;">{{ task.desc }}</p>
+        {% if task.image %}
+        <img style="height: 250px;width: 450px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);" src="{{ task.image.url }}" alt="{{ task.name }} image"/>
+        {% else %}
+        <p style="color: #e0e0e0;">No image</p>
+        {% endif %}
+        <p style="color: #e0e0e0;">Completed: {{ task.completed }}</p>
+        <p style="color: #e0e0e0;">Created At: {{ task.created_at }}</p>
+        <button type="submit" style="background-color: #bb86fc; color: #121212; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease;"><a href="{% url 'update_task' task.id %}" style="text-decoration: none; color: #121212;">Update</a></button>
+        <form action="{% url 'delete_task' task.id %}" method="POST" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" style="background-color: #e74c3c; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease;">Delete</button>
+        </form>
+    </div>
+    {% endfor %}
+    
+    <h2 style="color: #86f4fc; text-align: center;">Completed Tasks</h2>
+    {% for task in completed_tasks %}
+    <div style="background-color: #1f1f1f; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); margin-bottom: 20px; animation: slideIn 1s ease-in-out;">
+        <h3 style="color: #bb86fc;">{{ task.name }}</h3>
+        <p style="color: #e0e0e0;">{{ task.desc }}</p>
+        {% if task.image %}
+        <img style="height: 250px;width: 450px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);" src="{{ task.image.url }}" alt="{{ task.name }} image"/>
+        {% else %}
+        <p style="color: #e0e0e0;">No image</p>
+        {% endif %}
+        <p style="color: #e0e0e0;">Completed: {{ task.completed }}</p>
+        <p style="color: #e0e0e0;">Created At: {{ task.created_at }}</p>
+        <button type="submit" style="background-color: #bb86fc; color: #121212; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease;"><a href="{% url 'update_task' task.id %}" style="text-decoration: none; color: #121212;">Update</a></button>
+        <form action="{% url 'delete_task' task.id %}" method="POST" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" style="background-color: #e74c3c; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease;">Delete</button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+<style>
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        background-color: #121212;
+        color: #e0e0e0;
+    }
+
+    .content {
+        flex: 1;
+    }
+
+    button:hover {
+        background-color: #9f67e3 !important;
+    }
+
+    footer ul li a:hover {
+        color: #ffdd57 !important;
+    }
+
+    footer ul li a {
+        transition: color 0.3s ease;
+    }
+</style>
+
+<footer style="background-color: #1f1f1f; padding: 20px; border-top: 2px solid #bb86fc; text-align: center; color: #e0e0e0; position: fixed; bottom: 0; width: 100%; left: 0;">
+    <ul style="list-style: none; padding: 0; display: flex; justify-content: center; margin: 0;">
+        <li style="margin: 0 10px;">
+            <a href="https://instagram.com" target="_blank" style="text-decoration: none; color: #bb86fc; font-weight: bold; transition: color 0.3s ease;">Instagram</a>
+        </li>
+        <li style="margin: 0 10px;">
+            <a href="https://twitter.com" target="_blank" style="text-decoration: none; color: #bb86fc; font-weight: bold; transition: color 0.3s ease;">X</a>
+        </li>
+    </ul>
+    <p style="color: #e0e0e0; margin-top: 10px;">&copy; 2024 Musku Sai Deepak Reddy. All rights reserved.</p>
+</footer>

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <h1 style="text-align: center; color: #bb86fc; margin-bottom: 20px; animation: fadeIn 1s ease-in-out;">Login</h1>
+    <form method="post" style="background-color: #5b5656; padding: 20px; border-radius: 8px; max-width: 400px; margin: 0 auto; box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); animation: slideIn 1s ease-in-out;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" style="background-color: #bb86fc; color: #121212; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease; animation: buttonHover 0.3s ease;">Login</button>
+    </form>
+
+    {% if messages %}
+        <div style="margin-top: 20px; animation: fadeIn 1s ease-in-out;">
+            {% for message in messages %}
+                <p style="color: #ffdd57; text-align: center; animation: fadeIn 1s ease-in-out;">{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+
+<style>
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes buttonHover {
+        from {
+            transform: scale(1);
+        }
+        to {
+            transform: scale(1.05);
+        }
+    }
+
+    form button:hover {
+        background-color: #9f67e3;
+        animation: buttonHover 0.3s ease;
+    }
+</style>
+{% endblock %}

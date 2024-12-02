@@ -1,0 +1,42 @@
+<nav style="background-color: #1f1f1f; padding: 10px; border-radius: 8px; text-align: center; margin-top: 20px;">
+    <ul style="list-style: none; padding: 0; display: flex; justify-content: center; margin: 0;">
+        <li style="margin: 0 10px;">
+            <a href="{% url 'home' %}" style="text-decoration: none; color: #e0e0e0; font-weight: bold; transition: color 0.3s ease;">HOME</a>
+        </li>
+        {% if request.user.is_authenticated %}
+        <li style="margin: 0 10px;">
+            <h2 style="color: #bb86fc;">Hello {{request.user}}</h2>
+        </li>
+        <li style="margin: 0 10px;">
+            <button style="background: none; border: none; cursor: pointer;">
+                <a href="{% url 'logout' %}" style="text-decoration: none; color: #e0e0e0; font-weight: bold; transition: color 0.3s ease;">Logout</a>
+            </button>
+        </li>
+        {% else %}
+        <li style="margin: 0 10px;">
+            <a href="{% url 'signup' %}" style="text-decoration: none; color: #e0e0e0; font-weight: bold; transition: color 0.3s ease;">SIGNUP</a>
+        </li>
+        <li style="margin: 0 10px;">
+            <a href="{% url 'login' %}" style="text-decoration: none; color: #e0e0e0; font-weight: bold; transition: color 0.3s ease;">LOGIN</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+
+<style>
+    nav ul li a:hover {
+        color: #ffdd57 !important;
+    }
+
+    nav ul li a {
+        transition: color 0.3s ease;
+    }
+
+    button a:hover {
+        color: #ffdd57 !important;
+    }
+
+    button a {
+        transition: color 0.3s ease;
+    }
+</style>

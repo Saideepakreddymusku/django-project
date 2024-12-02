@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+<div style="background-color: #f0f4f8; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); margin-top: 20px; animation: fadeIn 1s ease-in-out;">
+    <h3 style="color: #007BFF; text-align: center;">Welcome Back!</h3>
+    <p style="color: #333; text-align: center;">Here are your options</p>
+    <ul style="list-style: none; padding: 0; text-align: center;">
+        <li style="margin: 10px 0;">
+            <a href="{% url 'add_task' %}" style="text-decoration: none; color: #007BFF; font-weight: bold; transition: color 0.3s ease;">Add Task</a>
+        </li>
+        <li style="margin: 10px 0;">
+            <a href="{% url 'view_task' %}" style="text-decoration: none; color: #007BFF; font-weight: bold; transition: color 0.3s ease;">View Tasks</a>
+        </li>
+    </ul>
+</div>
+
+{% else %}
+<center>
+    <div style="background-color: #f0f4f8; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); max-width: 400px; margin-top: 20px; animation: fadeIn 1s ease-in-out;">
+        <h1 style="color: #007BFF; text-align: center;">Hey User Please Login</h1>
+        <p style="color: #333; text-align: center;">Login to Add your new Task or View your existing Tasks</p>
+    </div>
+</center>
+
+{% endif %}
+
+{% endblock content %}
+
+<style>
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    div ul li a:hover {
+        color: #0056b3 !important;
+    }
+
+    div ul li a {
+        transition: color 0.3s ease;
+    }
+</style>
